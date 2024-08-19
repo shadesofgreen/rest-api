@@ -22,7 +22,9 @@ HTTP Requests:
 Guzzle is used to simplify sending HTTP requests to the REST Countries API.
 
 Basic Authentication:
-Basic authentication is implemented to secure the API.
+1. HTTPS enabled
+2. Basic authentication is implemented to secure the API.
+3rd Party integration options can also be considered
 
 Installation
 To set up this project locally, follow these steps:
