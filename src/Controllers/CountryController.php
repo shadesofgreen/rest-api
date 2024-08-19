@@ -6,6 +6,26 @@ use App\Services\CountryService;
 
 class CountryController {
     private CountryService $service;
+    
+    public function authenticate() {
+        if (!isset($_SERVER['PHP_AUTH_USER'])) {
+            $this->sendUnauthorizedResponse();
+        }
+    
+        $username = $_SERVER['PHP_AUTH_USER'];
+        $password = $_SERVER['PHP_AUTH_PW'];
+    
+        if ($username !== USERNAME || $password !== PASSWORD) {
+            $this->sendUnauthorizedResponse();
+        }
+    }
+    
+    public function sendUnauthorizedResponse() {
+        header('WWW-Authenticate: Basic realm="Countries REST API"');
+        header('HTTP/1.0 401 Unauthorized');
+        echo json_encode(['error' => 'Unauthorized']);
+        exit;
+    }
 
     public function __construct() {
         $this->service = new CountryService();
@@ -21,7 +41,8 @@ class CountryController {
         $search = '';
         $sort = '';
 
-        
+        $this->authenticate();
+
         if (!empty($_GET['filter'])) {      
             $filters = $_GET['filter'];     //print_r($filters); 
         }
