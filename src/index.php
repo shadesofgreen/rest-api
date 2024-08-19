@@ -13,8 +13,6 @@ use App\Controllers\CountryController;
 $countryController = new CountryController();  
  
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-
- 
   
 switch ($_SERVER['REQUEST_METHOD'] == 'GET') {
     case 'GET':
