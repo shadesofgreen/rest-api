@@ -11,22 +11,10 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 use App\Controllers\CountryController;
 
 $countryController = new CountryController();  
-// echo "<pre>"; var_dump($header); echo "</pre>"; die(); 
+ 
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-// if ($uri == '/api/countries' && $_SERVER['REQUEST_METHOD'] == 'GET') {
-//     $countryController->getCountries();
-// } elseif (preg_match('/^\/api\/countries\/([A-Za-z]{2,3})$/', $uri, $matches)) {
-//     $countryController->getCountryByCode($matches[1]);
-// } elseif ($uri == '/api/regions' && $_SERVER['REQUEST_METHOD'] == 'GET') {
-//     $countryController->getRegions();
-// } elseif ($uri == '/api/languages' && $_SERVER['REQUEST_METHOD'] == 'GET') {
-//     $countryController->getLanguages();
-// } else {
-//     http_response_code(404);
-//     echo json_encode(['message' => 'Not Found']);
-// }
-
+ 
   
 switch ($_SERVER['REQUEST_METHOD'] == 'GET') {
     case 'GET':
