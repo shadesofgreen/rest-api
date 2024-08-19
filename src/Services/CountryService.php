@@ -27,7 +27,7 @@ class CountryService {
         });
     }
     
-    public function getCountries($filters = '', $search = '', $sort = '') { 
+    public function getCountries($filters = '', $search = '', $sort = '', $page = 1, $perPage = 10) { 
         $countries = $this->getAllCountries();
          
        
@@ -58,7 +58,20 @@ class CountryService {
         }
         $countries = json_encode($countries);  
         if(empty($sort) && empty($search) && empty($filters)){print_r($countries);}
-        return  json_encode($countries);  
+
+        // pagination
+        $offset = ($page - 1) * $perPage;
+        $paginatedCountries = array_slice($countries, $offset, $perPage);
+        // return $paginatedCountries;
+
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $perPage = isset($_GET['per_page']) ? (int)$_GET['per_page'] : 10;
+
+        $paginatedCountries = getCountries($page, $perPage);
+
+        header('Content-Type: application/json');
+        echo json_encode($paginatedCountries);
+        // return  json_encode($countries);  
     }
 
     public function getCountryByCode(string $code): array {

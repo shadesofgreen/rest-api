@@ -1,0 +1,8 @@
+# Redirect to the src folder if the requested URL is the site root
+RewriteEngine On
+
+# Check if the requested URL is the site root
+RewriteCond %{REQUEST_URI} ^/$
+
+# Redirect to the src folder
+RewriteRule ^(.*)$ /src/ [L,R=302]
