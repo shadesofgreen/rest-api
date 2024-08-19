@@ -1,0 +1,12 @@
+# Ensure mod_rewrite is enabled
+RewriteEngine On
+
+# Redirect from http://localhost/api/src/ to http://mywebsite.local
+RewriteCond %{HTTP_HOST} ^localhost$
+RewriteRule ^api/src/(.*)$ http://mywebsite.local/$1 [R=301,L]
+
+# Optionally, handle requests to mywebsite.local
+# Rewrite rules to handle clean URLs (e.g., removing index.php from URLs)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php/$1 [L]
